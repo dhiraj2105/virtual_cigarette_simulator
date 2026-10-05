@@ -30,9 +30,9 @@ FACE_MODEL_URL = (
 
 WINDOW_NAME = "Virtual Cigarette Simulator By Dhiraj"
 CAMERA_INDEX = 0
-CAMERA_WIDTH = 960
-CAMERA_HEIGHT = 540
-CAMERA_FPS = 30
+CAMERA_WIDTH = 1500
+CAMERA_HEIGHT = 900
+CAMERA_FPS = 60
 
 PINCH_MAX_RATIO = 0.62
 FINGER_EXTENSION_RATIO = 1.15
@@ -40,7 +40,7 @@ MOUTH_DISTANCE_RATIO = 0.22
 CIGARETTE_LENGTH = 105
 FILTER_LENGTH = 25
 CIGARETTE_RADIUS = 7
-SMOKE_MAX_PARTICLES = 90
+SMOKE_MAX_PARTICLES = 100
 SMOKE_SPAWN_INTERVAL = 0.045
 
 # Inhale/exhale interaction.
@@ -49,8 +49,8 @@ INHALE_MAX_DURATION = 3.0
 EXHALE_COOLDOWN = 0.25
 MOUTH_OPEN_RATIO = 0.035
 MOUTH_OPEN_HYSTERESIS = 0.008
-EXHALE_PARTICLES_PER_SECOND = 34.0
-EXHALE_DURATION = 1.15
+EXHALE_PARTICLES_PER_SECOND = 200
+EXHALE_DURATION = 5
 
 WHITE = (245, 245, 245)
 LIGHT_GRAY = (205, 205, 205)
@@ -401,7 +401,7 @@ def draw_hud(
     cv2.rectangle(overlay, (14, 14), (w - 14, 126), BLACK, -1)
     cv2.addWeighted(overlay, 0.58, image, 0.42, 0, image)
 
-    cv2.putText(image, "VIRTUAL CIGARETTE", (30, 42), cv2.FONT_HERSHEY_SIMPLEX, 0.78, WHITE, 2, cv2.LINE_AA)
+    cv2.putText(image, "DON'T SMOKE", (30, 42), cv2.FONT_HERSHEY_SIMPLEX, 0.78, WHITE, 2, cv2.LINE_AA)
 
     if exhaling:
         status, status_color = "EXHALING SMOKE", YELLOW
@@ -417,7 +417,7 @@ def draw_hud(
         status, status_color = "Bring index + middle fingers together", LIGHT_GRAY
 
     cv2.putText(image, status, (30, 72), cv2.FONT_HERSHEY_SIMPLEX, 0.52, status_color, 1, cv2.LINE_AA)
-    cv2.putText(image, "Hold at mouth + open to inhale | Move away | Open to exhale", (30, 96), cv2.FONT_HERSHEY_SIMPLEX, 0.40, GRAY, 1, cv2.LINE_AA)
+    # cv2.putText(image, "Hold at mouth + open to inhale | Move away | Open to exhale", (30, 96), cv2.FONT_HERSHEY_SIMPLEX, 0.40, GRAY, 1, cv2.LINE_AA)
     cv2.putText(image, "Q / ESC Quit    R Reset    F FPS", (30, 116), cv2.FONT_HERSHEY_SIMPLEX, 0.40, GRAY, 1, cv2.LINE_AA)
 
     if show_fps:
@@ -436,7 +436,6 @@ def open_camera() -> cv2.VideoCapture:
 
 def main() -> None:
     print("Virtual Cigarette Simulator")
-    print("MediaPipe Tasks API  |  Hand Landmarker + Face Landmarker")
     print()
 
     ensure_models()
